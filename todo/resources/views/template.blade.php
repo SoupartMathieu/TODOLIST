@@ -11,7 +11,10 @@
 		{!! Html::style('https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css') !!}
 
     <style> textarea { resize: none; }
-
+        .PAlert
+        {
+            background: none;
+        }
 
     </style>
 
@@ -46,7 +49,8 @@
     </div><!-- /.container-fluid -->
 </nav>
 @if(Session::has('flash_message'))
-   <div class="alert alert=success">
+    <div class="alert alert-success" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{Session::get('flash_message')}}
     </div>
 @endif

@@ -29,8 +29,8 @@ class AddTaskController extends Controller
                 {
                     return view('errorUrl');
                 }
-         //   return $id." ".$tasks;
-           return view('update')->with('tasks',$tasks);
+            return $id." ".$tasks;
+          // return view('update')->with('tasks',$tasks);
         }
         return $id;
     }

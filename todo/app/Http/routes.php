@@ -23,6 +23,11 @@ Route::get('/AjoutTache/{id}',[
 'as'=>'/AjouterTache',
 'uses'=>'AddTaskController@index'
 ]);
+Route::get('/update/{id}','taskController@viewEdit');
+Route::post('/edit/{id}',[
+'as'=>'edit',
+    'uses'=>'taskController@edit'
+]);
 
 Route::get('/login', function () {
     return view('login');

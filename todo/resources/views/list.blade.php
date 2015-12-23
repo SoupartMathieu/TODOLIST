@@ -43,7 +43,7 @@ text-decoration: none;
     <div class="row">
     @foreach($tasks as $task)
             <div class="col-md-3 portfolio-item">
-      <h3 class="titre_tache"> <a class="lien" id="{{$task->id}}" href="{{URL::to('/AjoutTache/'.$task->id)}}">{{$task->name}}</a> <a type="button" style="float: right;margin-right: 10px;" class="btn btn-primary btn-sm">Edit</a> <a type="button" style="float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/Delete/'.$task->id)}}">Delete</a></h3>
+      <h3 class="titre_tache"> <a class="lien" id="{{$task->id}}" href="{{URL::to('/AjoutTache/'.$task->id)}}">{{$task->name}}</a> <a type="button" style="float: right;margin-right: 10px;" class="btn btn-primary btn-sm" href="{{URL::to('/update/'.$task->id)}}">Edit</a> <a type="button" style="float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/Delete/'.$task->id)}}">Delete</a></h3>
        <p>{{$task->descriptionTache}}</p>
                 </div>
     @endforeach
