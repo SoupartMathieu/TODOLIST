@@ -16,9 +16,12 @@
 
 
 
-
 Route::get('/','taskController@index');
-
+Route::get('/AjoutTache','AddTaskController@erreur');
+Route::get('/AjoutTache/{id}',[
+'as'=>'/AjouterTache',
+'uses'=>'AddTaskController@index'
+]);
 
 Route::get('/login', function () {
     return view('login');

@@ -1,15 +1,9 @@
 @extends('template')
 
 @section('titre')
-    task
+    Ajout d'une sous-tache
 @endsection
 
-        @if(Session::has('message'))
-        <div class="alert">
-            {{Session::get('message')}}
-        </div>
-
-        @endif
 
 @section('contenu')
     <br>
@@ -27,10 +21,10 @@
                     {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('date') ? 'has-error' : '' !!}">
-
+                    {!! Form::date('description', null, array('class' => 'form-control','required')) !!}
                     {!! $errors->first('date', '<small class="help-block">:message</small>') !!}
                 </div>
-                {!! Form::submit('Envoyer !', array('class' => 'btn btn-info pull-right')) !!}
+                {!! Form::submit('Enregistrer ', array('class' => 'btn btn-info pull-right')) !!}
                 {!! Form::close() !!}
             </div>
         </div>
