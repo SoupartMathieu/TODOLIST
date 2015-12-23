@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Task;
 
-class listeController extends Controller
+class seetaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,7 @@ class listeController extends Controller
      */
     public function index()
     {
-        $tasks= Task::all();
-
-        return view('list',compact('tasks'));
+        return view('seetask');
     }
 
     /**

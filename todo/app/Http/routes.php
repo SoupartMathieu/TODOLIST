@@ -11,6 +11,12 @@
 |
 */
 
+
+//les routes servent a rediriger vers un endroit voulu
+
+
+
+
 Route::get('/','taskController@index');
 
 
@@ -18,15 +24,12 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/list', function () {
-    return view('list');
-});
+Route::get('/list','listeController@index');
 
-Route::get('/task', function () {
-    return view('task');
-});
-
-Route::controller('users', 'taskController');
+Route::post('/task', [
+    'as'=>'postTask',
+    'uses'=>'taskController@postTask'
+]);
+//Route::controller('users', 'taskController');
 //Route::post('users', 'taskController');
-
 

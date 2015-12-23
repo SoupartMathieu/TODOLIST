@@ -3,12 +3,6 @@
 @section('titre')
     task
     @endsection
-    @section('contenu')
-            <!-- {!! Form::open(['url' => 'users/task']) !!}
-    {!! Form::label('tache', 'Ajouter une tache : ') !!}
-    {!! Form::text('tache') !!}
-    {!! Form::submit('Envoyer !') !!}
-    {!! Form::close() !!}-->
 
 @section('contenu')
     <br>
@@ -20,4 +14,5 @@
             </div>
         </div>
     </div>
+
 @endsection

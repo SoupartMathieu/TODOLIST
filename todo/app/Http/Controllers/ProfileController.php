@@ -6,10 +6,25 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Task;
 
-class listeController extends Controller
+class ProfileController extends Controller
 {
+
+    /**
+     * Update the user's profile.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function updateProfile(Request $request)
+    {
+        if ($request->user()) {
+            // $request->user() returns an instance of the authenticated user...
+        }
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +32,7 @@ class listeController extends Controller
      */
     public function index()
     {
-        $tasks= Task::all();
-
-        return view('list',compact('tasks'));
+        //
     }
 
     /**

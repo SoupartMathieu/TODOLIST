@@ -27,17 +27,18 @@ class taskController extends Controller
 
     public function postTask(Request $request)
     {
-        //ici ecriture dans la BDD de ma form tache
+
+        //ici écriture dans la BDD de ma form tache
         $input = $request->all();
         $tache=new Task();
         $tache->user_id="1";
         $tache->name =$request->input('tache');
         $tache->descriptionTache =$request->input('description');
-        $tache->fini="0
+        $tache->fini="0";
        // return 'Votre tache est ' . $request->input('tache');
         //$tache->task =$request->input('tache');
         $tache->save();
-        return view('confirmTask');
+        return redirect()->back()->with('message','Enregistrée');
 
     }
 
