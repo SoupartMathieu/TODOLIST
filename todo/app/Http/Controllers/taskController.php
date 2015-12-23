@@ -38,11 +38,18 @@ class taskController extends Controller
        // return 'Votre tache est ' . $request->input('tache');
         //$tache->task =$request->input('tache');
         $tache->save();
-        return redirect()->back()->with('message','Enregistrée');
+       \ Session::flash('flash_message','Enregistrée avec succés');
+        return redirect('/');
 
     }
 
-
+    public function delete($id)
+    {
+        $tache=new Task();
+        $tache = Task::find($id);
+        $tache->delete();
+        return redirect('/list');
+    }
     /**
      * Show the form for creating a new resource.
      *

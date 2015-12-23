@@ -18,7 +18,8 @@ class CreateTacheTable extends Migration
             $table->string('name');
             $table->string('descriptionTache');
             $table->boolean('fini');
-
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
         });
     }
 

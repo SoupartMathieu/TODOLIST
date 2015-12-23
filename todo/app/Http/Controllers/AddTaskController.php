@@ -19,12 +19,18 @@ class AddTaskController extends Controller
     {
         if ($id==0 || $id=="")
         {
-            return "une erreur est survenue";
+            return view('errorUrl');
         }
+
         else
         {
-            $tasks= Task::all();
-            return view('la vue modif',compact('tasks'));
+            $tasks= Task::find($id);
+                    if (is_null($tasks))
+                {
+                    return view('errorUrl');
+                }
+         //   return $id." ".$tasks;
+           return view('update')->with('tasks',$tasks);
         }
         return $id;
     }

@@ -2,6 +2,7 @@
 
 @section('titre')
     Ajout d'une sous-tache
+    {{$tasks->name}}
 @endsection
 
 
@@ -9,11 +10,11 @@
     <br>
     <div class="col-sm-offset-2 col-sm-7">
         <div class="panel panel-info">
-            <div class="panel-heading">Ajout de votre tache</div>
+            <div class="panel-heading">Ajout de votre sous-tache</div>
             <div class="panel-body">
                 {!! Form::open(array('url' => '/task')) !!}
                 <div class="form-group {!! $errors->has('tache') ? 'has-error' : '' !!}">
-                    {!! Form::text('tache', null, array('class' => 'form-control','required' ,'placeholder' => 'Entrez votre tache')) !!}
+                    {!! Form::text('tache', null, array('class' => 'form-control','readonly' ,'value' =>'{{$tasks}}')) !!}
                     {!! $errors->first('tache', '<small class="help-block">:message</small>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('description') ? 'has-error' : '' !!}">
