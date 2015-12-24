@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Task;
+use Auth ;
 
 class listeController extends Controller
 {
@@ -16,8 +17,11 @@ class listeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {  if (Auth::user())
     {
-        $tasks= Task::all();
+        $id= Auth::user()->id;
+    }
+        $tasks= Task::all()->where('user_id',$id);
 
         return view('list',compact('tasks'));
     }

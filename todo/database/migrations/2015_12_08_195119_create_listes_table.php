@@ -14,9 +14,9 @@ class CreateListesTable extends Migration
     {
         Schema::create('lists', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index();
+            $table->integer('task_id');
             $table->string('name');
-            $table->string('description');
+           // $table->string('description');
             $table->date('DateCrea');
             $table->boolean('Accompli');
 

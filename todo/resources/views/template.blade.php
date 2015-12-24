@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Menu</a>
+            <a class="navbar-brand">Todo</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -38,12 +38,26 @@
             <ul class="nav navbar-nav">
                 <li> <!--class="active" --> <a href={{URL::to('/')}}>Ajouter <span class="sr-only">(current)</span></a></li>
                 <li><a href={{URL::to('/list')}}>Voir mes taches</a></li>
+                <li><a href={{URL::to('/about')}}>About</a></li>
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Sign in</a></li>
-
+                @if(auth()->guest())
+                    @if(!Request::is('auth/login'))
+                        <li><a href="{{ url('/auth/login') }}">Login</a></li>
+                    @endif
+                    @if(!Request::is('auth/register'))
+                        <li><a href="{{ url('/auth/register') }}">Register</a></li>
+                    @endif
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -52,6 +66,12 @@
     <div class="alert alert-success" role="alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         {{Session::get('flash_message')}}
+    </div>
+@endif
+@if(Session::has('flash_message_bad'))
+    <div class="alert alert-danger" role="alert">
+        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{Session::get('flash_message_bad')}}
     </div>
 @endif
 @yield('contenu')

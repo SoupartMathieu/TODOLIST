@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
+use Auth ;
 
 class taskController extends Controller
 {
@@ -28,44 +29,60 @@ class taskController extends Controller
 
     public function postTask(Request $request)
     {
-
+        if (Auth::user())
+    {
+        $id= Auth::user()->id;
         //ici écriture dans la BDD de ma form tache
-        $input = $request->all();
+     //   $input = $request->all();
         $tache=new Task();
-        $tache->user_id="1";
+        $tache->user_id=$id;
         $tache->name =$request->input('tache');
         $tache->descriptionTache =$request->input('description');
         $tache->fini="0";
-       // return 'Votre tache est ' . $request->input('tache');
-        //$tache->task =$request->input('tache');
         $tache->save();
-         return redirect('/')->with('flash_message','Ajouté avec succés');
+        return redirect('/')->with('flash_message','Ajouté avec succés');
+
+    }
+
 
     }
 
     public function delete($id)
     {
+
         $tache=new Task();
         $tache = Task::find($id);
         $tache->delete();
-        //session()->flash('flash_message','Suprimé avec succés');
-
         return redirect('/list')->with('flash_message','Suprimé avec succés');
     }
 
     public function edit(Request $request,$id)
-    {
-        //ici écriture dans la BDD de ma form tache
-        $input = $request->all();
-        $tache=new Task();
-        $tache = Task::find($id);
-        $tache->user_id="1";//////temporairre
-        $tache->name =$request->input('tache');
-        $tache->descriptionTache =$request->input('description');
-        $tache->fini="0";
+    { //$tache=new Task();
+        //$tache=Task::all()->where('user_id',$id);
+        $user = Auth::user()->id;
+        $tache = Task::where('id',$id)->where('user_id',$user)->get();
 
-        $tache->update();
-        return redirect('/list')->with('flash_message','Mise à jour réussie');
+    //   return $tache;
+        if(!$tache->isEmpty())
+        {
+            //ici écriture dans la BDD de ma form tache
+            $input = $request->all();
+            $tache=new Task();
+            $tache = Task::find($id);
+            $tache->user_id=$user;
+            $tache->name =$request->input('tache');
+            $tache->descriptionTache =$request->input('description');
+            $tache->fini="0";
+
+            $tache->update();
+            return redirect('/list')->with('flash_message','Modifié avec succés');
+        }
+        else
+        {
+            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+           //return redirect('/list',compact('flash_message_bad','Ceci n\'est pas votre tache'));
+
+        }
 
     }
 

@@ -36,16 +36,33 @@ text-decoration: none;
         border-bottom-right-radius: 10px;
         background: #46b8da;
     }
+    .bordure
+    {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1200px;
+    }
 
 </style>
 @section('contenu')
     <h1>Mes listes de taches</h1>
     <div class="row">
+
     @foreach($tasks as $task)
-            <div class="col-md-3 portfolio-item">
-      <h3 class="titre_tache"> <a class="lien" id="{{$task->id}}" href="{{URL::to('/AjoutTache/'.$task->id)}}">{{$task->name}}</a> <a type="button" style="float: right;margin-right: 10px;" class="btn btn-primary btn-sm" href="{{URL::to('/update/'.$task->id)}}">Edit</a> <a type="button" style="float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/Delete/'.$task->id)}}">Delete</a></h3>
-       <p>{{$task->descriptionTache}}</p>
+        <div class="bordure">
+            <div class="col-md-4 portfolio-item">
+      <h3 class="titre_tache"> <a class="lien" id="{{$task->id}}" href="{{URL::to('/NewTask/'.$task->id)}}">{{$task->name}}</a>
+              <a type="button" style="margin-top:2px;float: right;margin-right: 10px;" class="btn btn-primary btn-sm" href="{{URL::to('/update/'.$task->id)}}">Edit</a>
+              <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/Delete/'.$task->id)}}">Delete</a>
+      </h3>
+       <p>{{$task->descriptionTache}}
+             <br>
+          <a>Voir vos sous-taches</a>
+       </p>
+
                 </div>
     @endforeach
+    </div>
+
     </div>
 @endsection
