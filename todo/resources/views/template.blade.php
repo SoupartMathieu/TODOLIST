@@ -75,5 +75,16 @@
     </div>
 @endif
 @yield('contenu')
+
+<script>
+    $(document).ready(function() {
+        $('.row').css({
+            'margin-left': '0px',
+            'margin-right': '0px',
+
+        });
+    });
+
+</script>
 </body>
 </html>
