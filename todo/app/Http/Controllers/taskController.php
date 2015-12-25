@@ -32,8 +32,6 @@ class taskController extends Controller
         if (Auth::user())
     {
         $id= Auth::user()->id;
-        //ici écriture dans la BDD de ma form tache
-     //   $input = $request->all();
         $tache=new Task();
         $tache->user_id=$id;
         $tache->name =$request->input('tache');
@@ -44,12 +42,10 @@ class taskController extends Controller
 
     }
 
-
     }
 
     public function delete($id)
     {
-
         $tache=new Task();
         $tache = Task::find($id);
         $tache->delete();
@@ -62,7 +58,7 @@ class taskController extends Controller
         $user = Auth::user()->id;
         $tache = Task::where('id',$id)->where('user_id',$user)->get();
 
-    //   return $tache;
+
         if(!$tache->isEmpty())
         {
             //ici écriture dans la BDD de ma form tache
@@ -73,40 +69,37 @@ class taskController extends Controller
             $tache->name =$request->input('tache');
             $tache->descriptionTache =$request->input('description');
             $tache->fini="0";
-
             $tache->update();
             return redirect('/list')->with('flash_message','Modifié avec succés');
         }
         else
         {
             return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
-           //return redirect('/list',compact('flash_message_bad','Ceci n\'est pas votre tache'));
-
         }
 
     }
 
     public function viewEdit($id)
-    {
-        $id=$id;
-return view('/update',compact('id'));
-        /*if ($id==0 || $id=="")
+    {  $id=$id;
+        $user = Auth::user()->id;
+        $tache = Task::where('id',$id)->where('user_id',$user)->get();
+
+
+        if($tache->isEmpty())
+        {
+
+            return redirect('/list')->with('flash_message_bad','Ceci n\'est pas votre tache');
+        }
+        else
+        {
+            return view('/update',compact('id'));
+        }
+
+
+        if ($id==0 || $id=="")
         {
             return view('errorUrl');
         }
-
-        else
-        {
-            $tasks= Task::find($id);
-            if (is_null($tasks))
-            {
-                return view('errorUrl');
-            }
-            //   return $id." ".$tasks;
-            return view('update')->with('tasks',$tasks);
-        }*/
-
-        //return redirect('/update');
     }
     /**
      * Show the form for creating a new resource.

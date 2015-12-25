@@ -22,7 +22,8 @@
         text-align: center;
     }
     .lien{
-        margin-right: -110px;
+       text-align: center;
+        margin-right: -50px;
         text-decoration: none;
         color: black;
     }
@@ -50,19 +51,21 @@
 </style>
 @section('contenu')
 
-    <h1>Mes listes de taches</h1>
+    <h1>Sous tache(s)</h1>
     <div class="row" id="row" style="margin-left:0;margin-right:0;" >
 
-        @foreach($tasks as $task)
+        @foreach($lists->where('user_id',Auth::user()->id) as $list)
             <div class="bordure">
                 <div class="col-md-4 portfolio-item">
-                    <h3 class="titre_tache"> <a class="lien" id="{{$task->id}}" href="{{URL::to('/NewTask/'.$task->id)}}">{{$task->name}}</a>
-                        <a type="button" style="margin-top:2px;float: right;margin-right: 10px;" class="btn btn-primary btn-sm" href="{{URL::to('/update/'.$task->id)}}">Edit</a>
-                    </h3>
-                    <p>{{$task->descriptionTache}}
+<h3 class="titre_tache">
+    <a class="lien">{{$list->name}}</a>
+    @if($list->Accompli==0)
+    <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/SousTacheFin/'.$list->id)}}">Finie</a>
+@endif
 
-                    </p>
 
+</h3>
+      <p>Date de fin: {{$list->DateCrea}}</p>
                 </div>
                 @endforeach
             </div>

@@ -16,7 +16,7 @@ class CreateListesTable extends Migration
             $table->increments('id');
             $table->integer('task_id');
             $table->string('name');
-           // $table->string('description');
+            $table->integer('user_id');
             $table->date('DateCrea');
             $table->boolean('Accompli');
 

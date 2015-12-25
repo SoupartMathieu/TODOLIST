@@ -10,15 +10,16 @@ Route::get('/Delete/{id}',
 Route::get('/AjoutTache',[
     'middleware' => 'auth',
     'as'=>'erreur',
-    'uses'=>'AddTaskController@erreur']);
+    'uses'=>'ListeTaskController@erreur']);
 Route::get('/AjoutTache/{id}',[
     'middleware' => 'auth',
     'as'=>'/AjouterTache',
-    'uses'=>'AddTaskController@index']);
+    'uses'=>'ListeTaskController@index']);
 Route::get('/update/{id}',[
     'middleware' => 'auth',
     'as'=>'viewEdit',
     'uses'=>'taskController@viewEdit']);
+Route::get('/update', function () {return view('errorUrl');});
 Route::post('/edit/{id}',[
     'middleware' => 'auth',
     'as'=>'edit',
@@ -26,24 +27,36 @@ Route::post('/edit/{id}',[
 Route::post('/AddNewTask/{id}',[
     'middleware' => 'auth',
     'as'=>'createTaches',
-    'uses'=>'AddTaskController@createTaches']);
+    'uses'=>'ListeTaskController@createTaches']);
+Route::get('/AddNewTask',[
+    'middleware' => 'auth',
+    'as'=>'erreur',
+    'uses'=>'ListeTaskController@erreur']);
+Route::get('/SeeSousTask/{id}',[
+    'middleware' => 'auth',
+    'as'=>'SeeSousTask',
+    'uses'=>'ListeTaskController@SeeSousTask']);
 Route::get('/NewTask/{id}',[
     'middleware' => 'auth',
     'as'=>'AddSousTaches',
-    'uses'=>'AddTaskController@AddSousTaches']);
+    'uses'=>'ListeTaskController@AddSousTaches']);
 Route::get('/NewTask',[
     'middleware' => 'auth',
     'as'=>'erreur',
-    'uses'=>'AddTaskController@erreur']);
+    'uses'=>'ListeTaskController@erreur']);
 /*Route::get('/login', function () {return view('login');});*/
 Route::get('/list',[
     'middleware' => 'auth',
     'as'=>'index',
-    'uses'=>'listeController@index']);
+    'uses'=>'ListeTaskController@liste']);
 Route::post('/task', [
     'middleware' => 'auth',
     'as'=>'postTask',
     'uses'=>'taskController@postTask']);
+Route::get('/SousTacheFin/{id}', [
+    'middleware' => 'auth',
+    'as'=>'postTask',
+    'uses'=>'ListeTaskController@SousTacheFini']);
 Route::get('/about', function () {return view('about');});
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

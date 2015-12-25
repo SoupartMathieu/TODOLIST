@@ -20,7 +20,7 @@
 
                 <div class="form-group {!! $errors->has('dateFin') ? 'has-error' : '' !!}">
                     {!! Form::label('date', 'Date de fin', array('class' => 'dateFinal')) !!}
-                    {!! Form::date('dateFin', null, array('class' => 'form-control','required')) !!}
+                    {!! Form::date('dateFin', null, array('id'=>'datepicker','class' => 'form-control','required')) !!}
                     {!! $errors->first('dateFin', '<small class="help-block">:message</small>') !!}
                 </div>
                 {!! Form::submit('Enregistrer ', array('class' => 'btn btn-info pull-right')) !!}

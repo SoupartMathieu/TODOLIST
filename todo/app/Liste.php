@@ -10,7 +10,7 @@ class Liste extends Model
     protected $table = 'lists';
 
     public $timestamps=false;
-    protected $fillable=['id','task_id','name','DateCrea','Accompli'];
+    protected $fillable=['id','task_id','name','user_id','DateCrea','Accompli'];
 
 
 }
