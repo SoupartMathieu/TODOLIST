@@ -45,12 +45,16 @@ class taskController extends Controller
     }
 
     public function delete($id)
-    {
+    {$userid= Auth::user()->id;
         $tache=new Task();
+        $soustache=new Liste();
         $tache = Task::find($id);
+        $soustache=Liste::where('task_id',$id)->where('user_id',$userid);
+        $soustache->delete();
         $tache->delete();
         return redirect('/list')->with('flash_message','Suprimé avec succés');
     }
+
 
     public function edit(Request $request,$id)
     { //$tache=new Task();

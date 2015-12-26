@@ -13,8 +13,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script>
         $(function() {
-            $( "#datepicker" ).datepicker();
-        });
+            $( "#datepicker" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
     </script>
     <style> textarea { resize: none; }
         .PAlert
