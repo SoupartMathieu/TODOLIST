@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\task;
+use App\Liste;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

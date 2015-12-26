@@ -14,7 +14,7 @@
             <div class="panel-body">
                 {!! Form::open(array('url' => '/AddNewTask/'.$id)) !!}
                 <div class="form-group {!! $errors->has('SousTache') ? 'has-error' : '' !!}">
-                    {!! Form::text('SousTache', null, array('class' => 'form-control','required' ,'placeholder' => 'Nom de la sous-tache')) !!}
+                    {!! Form::text('SousTache', null, array('class' => 'form-control','required' ,'placeholder' => 'Nom de la sous-tache','maxlength'=>'255')) !!}
                     {!! $errors->first('SousTache', '<small class="help-block">:message</small>') !!}
                 </div>
 

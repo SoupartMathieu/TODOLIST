@@ -19,11 +19,11 @@
                 <div class="form-group {!! $errors->has('tache') ? 'has-error' : '' !!}">
 
 
-                    {!! Form::text('tache', null, array('class' => 'form-control','required' ,'placeholder' => 'Nom de la tache')) !!}
+                    {!! Form::text('tache', null, array('class' => 'form-control','required' ,'placeholder' => 'Nom de la tache','maxlength'=>'255')) !!}
                     {!! $errors->first('tache', '<small class="help-block">:message</small>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('description') ? 'has-error' : '' !!}">
-                    {!! Form::text('description', null, array('class' => 'form-control','required', 'placeholder' => 'Description de la tache')) !!}
+                    {!! Form::text('description', null, array('class' => 'form-control','required', 'placeholder' => 'Description de la tache','maxlength'=>'255')) !!}
                     {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
                 </div>
 
