@@ -16,6 +16,7 @@
             $( "#datepicker" ).datepicker({
                 dateFormat: "yy-mm-dd"
             });
+        });
     </script>
     <style> textarea { resize: none; }
         .PAlert
