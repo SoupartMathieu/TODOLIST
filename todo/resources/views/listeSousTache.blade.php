@@ -60,12 +60,16 @@
 <h3 class="titre_tache">
     <a class="lien">{{$list->name}}</a>
     @if($list->Accompli==0)
-    <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/SousTacheFin/'.$list->id)}}">Finie</a>
+    <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-info btn-sm" href="{{URL::to('/SousTacheFin/'.$list->id)}}">Finie</a>
 @endif
 
 
 </h3>
-      <p>Date de fin: {{$list->DateCrea}}</p>
+      <p style="height:35px;">Date de fin: {{$list->DateCrea}}
+          <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-primary btn-sm" href="{{URL::to('/vieweditSTache/'.$list->id)}}">edit</a>
+          <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/deleteStache/'.$list->id)}}">Delete</a>
+
+      </p>
                 </div>
                 @endforeach
             </div>

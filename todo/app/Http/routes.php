@@ -7,6 +7,10 @@ Route::get('/Delete/{id}',
     ['middleware' => 'auth',
     'as'=>"delete",
     'uses'=>'taskController@delete']);
+Route::get('/deleteStache/{id}',
+    ['middleware' => 'auth',
+        'as'=>"deleteStache",
+        'uses'=>'taskController@deleteStache']);
 Route::get('/AjoutTache',[
     'middleware' => 'auth',
     'as'=>'erreur',
@@ -24,6 +28,10 @@ Route::post('/edit/{id}',[
     'middleware' => 'auth',
     'as'=>'edit',
     'uses'=>'taskController@edit']);
+Route::get('/vieweditSTache/{id}',[
+    'middleware' => 'auth',
+    'as'=>'edit',
+    'uses'=>'taskController@vieweditSTache']);
 Route::post('/AddNewTask/{id}',[
     'middleware' => 'auth',
     'as'=>'createTaches',
@@ -53,6 +61,11 @@ Route::post('/task', [
     'middleware' => 'auth',
     'as'=>'postTask',
     'uses'=>'taskController@postTask']);
+//Route::get('/upsousT/{id}',function(){return view('updateSousTache');});
+Route::post('/editSTache/{id}', [
+    'middleware' => 'auth',
+    'as'=>'editSTache',
+    'uses'=>'taskController@editSTache']);
 Route::get('/SousTacheFin/{id}', [
     'middleware' => 'auth',
     'as'=>'postTask',
@@ -62,11 +75,6 @@ Route::get('/about', function () {return view('about');});
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
-
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
-
-/*Route::controllers([
-    'password' => 'Auth\PasswordController',
-]);*/

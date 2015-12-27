@@ -56,6 +56,14 @@ class taskController extends Controller
         return redirect('/list')->with('flash_message','Suprimé avec succés');
     }
 
+    public function deleteStache($id)
+    {$userid= Auth::user()->id;
+        $soustache=new Liste();
+        $soustache=Liste::where('id',$id);
+        $soustache->delete();
+        return redirect('/list')->with('flash_message','Suprimé avec succés');
+    }
+
 
     public function edit(Request $request,$id)
     { //$tache=new Task();
@@ -106,15 +114,55 @@ class taskController extends Controller
             return view('errorUrl');
         }
     }
+
+    public function vieweditSTache(Request $request,$id)
+    {
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if($tache->isEmpty())
+        {
+            return redirect('/list')->with('flash_message_bad','Ceci n\'est pas votre sous-tache');
+        }
+        else
+        {
+            return view('/updateSousTache',compact('id'));
+        }
+
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function editSTache(Request $request,$id)
     {
-        //
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if(!$tache->isEmpty())
+        {
+            //ici écriture dans la BDD de ma form tache
+            $tache=new Liste();
+            $tache = Liste::find($id);
+            $tache->name =$request->input('SousTache');
+            $tache->DateCrea =$request->input('dateFin');
+
+            $tache->update();
+            return redirect('/list')->with('flash_message','Sous-tache modifiée avec succés');
+        }
+        else
+        {
+            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+        }
+
     }
+
+
 
     /**
      * Store a newly created resource in storage.
