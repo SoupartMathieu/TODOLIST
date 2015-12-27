@@ -83,7 +83,8 @@ class ListeTaskController extends Controller
     }
 
     public function liste()
-    {  if (Auth::user())
+    {
+        if (Auth::user())
     {
         $id= Auth::user()->id;
     }
