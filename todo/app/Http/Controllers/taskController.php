@@ -46,23 +46,52 @@ class taskController extends Controller
     }
 
     public function delete($id)
-    {$userid= Auth::user()->id;
-        $tache=new Task();
-        $soustache=new Liste();
-        $tache = Task::find($id);
-        $soustache=Liste::where('task_id',$id)->where('user_id',$userid);
-        $soustache->delete();
-        $tache->delete();
-        return redirect('/list')->with('flash_message','Suprimé avec succés');
-    }
+    {
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if(!$tache->isEmpty())
+        {
+
+            $tache=new Task();
+            $soustache=new Liste();
+            $tache = Task::find($id);
+            $soustache=Liste::where('task_id',$id)->where('user_id',$user);
+            $soustache->delete();
+            $tache->delete();
+            return redirect('/list')->with('flash_message','Suprimé avec succés');
+
+        }
+        else
+        {
+            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+        }
+
+       }
 
     public function deleteStache($id)
-    {$userid= Auth::user()->id;
-        $soustache=new Liste();
-        $soustache=Liste::where('id',$id);
-        $soustache->delete();
-        return redirect('/list')->with('flash_message','Suprimé avec succés');
-    }
+    {
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if(!$tache->isEmpty())
+        {
+
+            $soustache=new Liste();
+            $soustache=Liste::where('id',$id);
+            $soustache->delete();
+            return redirect('/list')->with('flash_message','Suprimé avec succés');
+        }
+        else
+        {
+            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+        }
+
+          }
 
 
     public function edit(Request $request,$id)
