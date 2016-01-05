@@ -10,7 +10,7 @@ Route::get('/Delete/{id}',
 Route::get('/deleteStache/{id}',
     ['middleware' => 'auth',
         'as'=>"deleteStache",
-        'uses'=>'taskController@deleteStache']);
+        'uses'=>'ListeTaskController@deleteStache']);
 Route::get('/AjoutTache',[
     'middleware' => 'auth',
     'as'=>'erreur',
@@ -31,7 +31,7 @@ Route::post('/edit/{id}',[
 Route::get('/vieweditSTache/{id}',[
     'middleware' => 'auth',
     'as'=>'edit',
-    'uses'=>'taskController@vieweditSTache']);
+    'uses'=>'ListeTaskController@vieweditSTache']);
 Route::post('/AddNewTask/{id}',[
     'middleware' => 'auth',
     'as'=>'createTaches',
@@ -65,7 +65,7 @@ Route::post('/task', [
 Route::post('/editSTache/{id}', [
     'middleware' => 'auth',
     'as'=>'editSTache',
-    'uses'=>'taskController@editSTache']);
+    'uses'=>'ListeTaskController@editSTache']);
 Route::get('/SousTacheFin/{id}', [
     'middleware' => 'auth',
     'as'=>'postTask',

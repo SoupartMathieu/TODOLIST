@@ -46,10 +46,10 @@ class taskController extends Controller
     }
 
     public function delete($id)
-    {
+    {//permet de suprimer la liste de tache avec les taches associées
         //verifie que la sous tache appartient bien a cet utilisateur
         $user = Auth::user()->id;
-        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+        $tache = Task::where('id',$id)->where('user_id',$user)->get();
 
 
         if(!$tache->isEmpty())
@@ -71,27 +71,6 @@ class taskController extends Controller
 
        }
 
-    public function deleteStache($id)
-    {
-        //verifie que la sous tache appartient bien a cet utilisateur
-        $user = Auth::user()->id;
-        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
-
-
-        if(!$tache->isEmpty())
-        {
-
-            $soustache=new Liste();
-            $soustache=Liste::where('id',$id);
-            $soustache->delete();
-            return redirect('/list')->with('flash_message','Suprimé avec succés');
-        }
-        else
-        {
-            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
-        }
-
-          }
 
 
     public function edit(Request $request,$id)
@@ -110,7 +89,7 @@ class taskController extends Controller
             $tache->user_id=$user;
             $tache->name =$request->input('tache');
             $tache->descriptionTache =$request->input('description');
-            $tache->fini="0";
+           // $tache->fini="0";
             $tache->update();
             return redirect('/list')->with('flash_message','Modifié avec succés');
         }
@@ -144,105 +123,5 @@ class taskController extends Controller
         }
     }
 
-    public function vieweditSTache(Request $request,$id)
-    {
-        //verifie que la sous tache appartient bien a cet utilisateur
-        $user = Auth::user()->id;
-        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
 
-
-        if($tache->isEmpty())
-        {
-            return redirect('/list')->with('flash_message_bad','Ceci n\'est pas votre sous-tache');
-        }
-        else
-        {
-            return view('/updateSousTache',compact('id'));
-        }
-
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function editSTache(Request $request,$id)
-    {
-        //verifie que la sous tache appartient bien a cet utilisateur
-        $user = Auth::user()->id;
-        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
-
-
-        if(!$tache->isEmpty())
-        {
-            //ici écriture dans la BDD de ma form tache
-            $tache=new Liste();
-            $tache = Liste::find($id);
-            $tache->name =$request->input('SousTache');
-            $tache->DateCrea =$request->input('dateFin');
-
-            $tache->update();
-            return redirect('/list')->with('flash_message','Sous-tache modifiée avec succés');
-        }
-        else
-        {
-            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
-        }
-
-    }
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

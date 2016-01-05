@@ -22,7 +22,6 @@ class ListeTaskController extends Controller
         {
             return view('errorUrl');
         }
-
         else
         {
             $tasks= Task::find($id);
@@ -30,10 +29,7 @@ class ListeTaskController extends Controller
                 {
                     return view('errorUrl');
                 }
-           // return $id." ".$tasks;
-          // return view('update')->with('tasks',$tasks);
         }
-        //return $id;
     }
 
     public function SeeSousTask($id)
@@ -89,11 +85,8 @@ class ListeTaskController extends Controller
         $id= Auth::user()->id;
     }
         $tasks= Task::all()->where('user_id',$id);
-        //$counts=Liste::where('user_id',$id)->count();
-$lists=Liste::all()->where('user_id',$id);
-//$lists=Liste::where('Accompli','=',1)->count();
-        //return $lists."/".$counts."<br>";
-        return view('list',compact('tasks','counts','lists'));
+        $lists=Liste::all()->where('user_id',$id);
+        return view('list',compact('tasks','lists'));
     }
 
     public function erreur()
@@ -146,6 +139,72 @@ $lists=Liste::all()->where('user_id',$id);
         $tache->Accompli="0";
         $tache->save();
         return redirect('/list')->with('flash_message','Sous-tache ajoutée avec succés');
+
+    }
+
+    public function vieweditSTache(Request $request,$id)
+    {
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if($tache->isEmpty())
+        {
+            return redirect('/list')->with('flash_message_bad','Ceci n\'est pas votre sous-tache');
+        }
+        else
+        {
+            return view('/updateSousTache',compact('id'));
+        }
+
+    }
+
+    public function deleteStache($id)
+    {
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if(!$tache->isEmpty())
+        {
+
+            $soustache=new Liste();
+            $soustache=Liste::where('id',$id);
+            $soustache->delete();
+            return redirect('/list')->with('flash_message','Suprimé avec succés');
+        }
+        else
+        {
+            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+        }
+
+    }
+
+
+    public function editSTache(Request $request,$id)
+    {
+        //verifie que la sous tache appartient bien a cet utilisateur
+        $user = Auth::user()->id;
+        $tache = Liste::where('id',$id)->where('user_id',$user)->get();
+
+
+        if(!$tache->isEmpty())
+        {
+            //ici écriture dans la BDD de ma form tache
+            $tache=new Liste();
+            $tache = Liste::find($id);
+            $tache->name =$request->input('SousTache');
+            $tache->DateCrea =$request->input('dateFin');
+
+            $tache->update();
+            return redirect('/list')->with('flash_message','Sous-tache modifiée avec succés');
+        }
+        else
+        {
+            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+        }
 
     }
 
