@@ -61,17 +61,23 @@ Route::post('/task', [
     'middleware' => 'auth',
     'as'=>'postTask',
     'uses'=>'taskController@postTask']);
+
 //Route::get('/upsousT/{id}',function(){return view('updateSousTache');});
+
 Route::post('/editSTache/{id}', [
     'middleware' => 'auth',
     'as'=>'editSTache',
     'uses'=>'ListeTaskController@editSTache']);
+
 Route::get('/SousTacheFin/{id}', [
     'middleware' => 'auth',
     'as'=>'postTask',
     'uses'=>'ListeTaskController@SousTacheFini']);
+
 Route::get('/about', function () {return view('about');});
+
 // Authentication routes...
+
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');

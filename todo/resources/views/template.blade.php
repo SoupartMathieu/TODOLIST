@@ -18,7 +18,8 @@
             });
         });
     </script>
-    <style> textarea { resize: none; }
+    <style> textarea
+        { resize: none; }
         .PAlert
         {
             background: none;
@@ -28,25 +29,15 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">Todo</a>
-        </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li> <!--class="active" --> <a href={{URL::to('/')}}>Ajouter <span class="sr-only">(current)</span></a></li>
+                <li> <a href={{URL::to('/')}}>Ajouter <span class="sr-only">(current)</span></a></li>
                 <li><a href={{URL::to('/list')}}>Voir mes taches</a></li>
-                <li><a href={{URL::to('/about')}}>About</a></li>
+                <li><a href={{URL::to('/about')}}>A propos</a></li>
+
 
             </ul>
 
@@ -70,18 +61,7 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-@if(Session::has('flash_message'))
-    <div class="alert alert-success" role="alert">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{Session::get('flash_message')}}
-    </div>
-@endif
-@if(Session::has('flash_message_bad'))
-    <div class="alert alert-danger" role="alert">
-        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        {{Session::get('flash_message_bad')}}
-    </div>
-@endif
+
 @yield('contenu')
 
 <script>
@@ -92,7 +72,6 @@
 
         });
     });
-
 </script>
 </body>
 </html>

@@ -4,6 +4,7 @@
     Liste
 @endsection
 <style>
+
     .portfolio-item {
         margin-bottom: 20px;
         margin-left:auto;
@@ -18,7 +19,6 @@
         background-color: dodgerblue;
         margin-bottom: 0;
         height: 35px;
-
         text-align: center;
     }
     .lien{
@@ -31,7 +31,7 @@
     {
         text-align: center;
     }
-    p{text-align: center;
+    p{text-align: left;
         margin-top: -15px;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
@@ -56,16 +56,21 @@
 
         @foreach($lists->where('user_id',Auth::user()->id) as $list)
             <div class="bordure">
-                <div class="col-md-4 portfolio-item">
-<h3 class="titre_tache">
+                <div class="col-md-4 portfolio-item" >
+<h3 class="titre_tache"  style="background-color: #cecece;">
     <a class="lien">{{$list->name}}</a>
     @if($list->Accompli==0)
     <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-info btn-sm" href="{{URL::to('/SousTacheFin/'.$list->id)}}">Finie</a>
+
+    @else
+
+
 @endif
 
 
+
 </h3>
-      <p style="height:35px;">Date de fin: {{$list->DateCrea}}
+      <p style="height:35px;">    Date de fin: {{$list->DateCrea}} @if($list->Accompli==1)(tache accomplie)@endif
           <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-primary btn-sm" href="{{URL::to('/vieweditSTache/'.$list->id)}}">edit</a>
           <a type="button" style="margin-top:2px;float: right;margin-right: 3px;" class="btn btn-danger btn-sm" href="{{URL::to('/deleteStache/'.$list->id)}}">Delete</a>
 

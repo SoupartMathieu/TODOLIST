@@ -173,11 +173,11 @@ class ListeTaskController extends Controller
             $soustache=new Liste();
             $soustache=Liste::where('id',$id);
             $soustache->delete();
-            return redirect('/list')->with('flash_message','Suprimé avec succés');
+            return redirect('/listeSousTache')->with('flash_message','Suprimé avec succés');
         }
         else
         {
-            return redirect('/list')->with('flash_message_bad',"Erreur vous avez modifié l'id");
+            return redirect('/listeSousTache')->with('flash_message_bad',"Erreur vous avez modifié l'id");
         }
 
     }
